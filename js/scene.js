@@ -1,4 +1,4 @@
-import * as THREE from 'three.js';
+import * as THREE from 'https://cdn.skypack.dev/three@<version>';
 
 // create scene and camera with fov 75 degrees and min/max render distance of 0.1/1000
 const scene = new THREE.Scene();
