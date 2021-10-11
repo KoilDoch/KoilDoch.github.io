@@ -1,20 +1,26 @@
-// create scene and camera with fov 75 degrees and min/max render distance of 0.1/1000
+import * as THREE from 'https://cdn.skypack.dev/three';
+
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
-camera.position.set(0,0,100);
-camera.lookAt(0,0,0);
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-// create the renderer
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0xffffff, 1);
-document.body.appendChild(renderer.domElement);
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
 
-// render the scene
-function animate() {
-	requestAnimationFrame( animate );
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
 
-	renderer.render( scene, camera );
-}
+camera.position.z = 5;
+
+const animate = function () {
+		requestAnimationFrame( animate );
+
+		cube.rotation.x += 0.01;
+		cube.rotation.y += 0.01;
+
+		renderer.render( scene, camera );
+};
 
 animate();			  			
