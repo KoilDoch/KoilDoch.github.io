@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import * as THREE from 'three.js';
 
 // create scene and camera with fov 75 degrees and min/max render distance of 0.1/1000
 const scene = new THREE.Scene();
