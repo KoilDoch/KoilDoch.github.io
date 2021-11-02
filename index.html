@@ -2,82 +2,15 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>test</title>
+		<title>My first three.js app</title>
 		<style>
 			body { margin: 0; }
-        </style>
-        
+		</style>
 	</head>
 	<body>
-		<a href="#" id="incX">x+</a>
-		<a href="#" id="incY">y+</a>
-		<a href="#" id="decX">-x</a>
-		<a href="#" id="decY">-y</a>
+		<script src="js/three.js"></script>
+		<script type="module">
+			import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
+		</script>
 	</body>
-	<script type="module">
-		import * as THREE from 'https://cdn.skypack.dev/three';
-
-		const scene = new THREE.Scene();
-		const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-		const renderer = new THREE.WebGLRenderer();
-		renderer.setSize( window.innerWidth, window.innerHeight );
-		document.body.appendChild( renderer.domElement );
-
-		var box = (function() {
-			const geometry = new THREE.BoxGeometry();
-			const material = new THREE.MeshBasicMaterial( { color: 0xf00000 } );
-			const cube = new THREE.Mesh( geometry, material );
-
-			var boxX = 0;
-			var boxY = 0;
-
-			return {
-				create: function() {
-					scene.add(cube);
-				},
-				updateRotate: function (x,y) {
-					boxX += x;
-					boxY += y;
-				},
-				rotate: function() {
-					cube.rotation.x += boxX;
-					cube.rotation.y += boxY;
-				},
-				returnRotate: function() {
-					console.log(boxX);
-					console.log(boxY);
-				}
-			};
-		})();
-		box.create(); // add box to scene
-
-		function changeRotation(x , y) {
-			return function() {
-				box.updateRotate(x , y);
-			};
-		}
-
-		var increaseX = changeRotation(0.01, 0);
-		var decreaseX = changeRotation(-0.01, 0);
-		var increaseY = changeRotation(0, 0.01);
-		var decreaseY = changeRotation(0, -0.01);
-
-		camera.position.z = 5;
-		
-		document.getElementById('incX').onclick = increaseX;
-		document.getElementById('incY').onclick = increaseY;
-		document.getElementById('decX').onclick = decreaseX;
-		document.getElementById('decY').onclick = decreaseY;
-
-		const animate = function () {
-				requestAnimationFrame( animate );
-				box.rotate();
-				renderer.render( scene, camera );
-		};
-
-		
-
-		animate();	
-	</script>
 </html>
